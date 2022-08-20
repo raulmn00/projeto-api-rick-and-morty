@@ -4,7 +4,7 @@ export class CharacterEntity {
     name;
     urlImage;
     constructor(character, userId) {
-        this.id = id.randomUUID();
+        this.id = character.id ?? randomUUID();
         this.name = character.name;
         this.urlImage = character.urlImage;
         this.userId = userId;
