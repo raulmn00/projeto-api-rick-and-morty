@@ -8,6 +8,7 @@ const userSchema = new Schema({
     userPassword: { type: String, required: true },
     userImage: { type: String, required: true },
     characters: { type: [characterDb], required: true },
+    createdAt: { type: Date, default: Date.now() },
 });
 
 export const userDb = model('User', userSchema);
