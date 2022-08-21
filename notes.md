@@ -5,6 +5,7 @@ YAGNI - You are not gonna need it;
 SMALL COMMITS;
 KISS - Keep it simple and stupid;
 //Mantenha tudo simples e estúpido, para qualquer pessoa conseguir utilizar.
+DI - Dependency Injection
 
 -   Login:
     1.Email
