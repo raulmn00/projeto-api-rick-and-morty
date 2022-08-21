@@ -7,6 +7,6 @@ export class createUserUseCase {
     async execute(user) {
         const newUser = new UserEntity(user);
         newUser.validate();
-        return await this.userRepository.create(newUser.getUser());
+        return await this.respository.create(newUser.getUser());
     }
 }
