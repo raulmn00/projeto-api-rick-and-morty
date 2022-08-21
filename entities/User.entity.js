@@ -11,6 +11,17 @@ export class UserEntity {
         this.charactersList = user.charactersList ?? [];
     }
 
+    validate() {
+        if (
+            !this.name ||
+            !this.userPassword ||
+            !this.userEmail ||
+            !this.userImage
+        ) {
+            throw new Error('User invalid.');
+        }
+    }
+
     addCharacter(character) {
         const newCharacter = new CharacterEntity(character, this.id);
         this.charactersList.push(newCharacter.getCharacter());
