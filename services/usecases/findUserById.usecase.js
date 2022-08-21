@@ -1,4 +1,4 @@
-export class findUserByIdUseCase {
+export class FindUserByIdUseCase {
     constructor(userRepository) {
         this.respository = userRepository;
     }
