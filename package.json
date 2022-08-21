@@ -10,5 +10,11 @@
     },
     "keywords": [],
     "author": "Raul Mariaci Neto",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "mongoose": "^6.5.2"
+    },
+    "devDependencies": {
+        "dotenv": "^16.0.1"
+    }
 }

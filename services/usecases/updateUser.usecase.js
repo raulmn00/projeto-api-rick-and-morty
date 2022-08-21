@@ -16,7 +16,6 @@ export class UpdateUserUseCase {
                 `User id: ${userId} to update not pertence a user.`,
             );
         }
-
         //Pega os valores antigos do usuario encontrado e substitui os valores novos que recebemos como parametro (userUpdate)
         const userModified = { ...userToUpdate, userUpdated };
 

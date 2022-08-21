@@ -5,7 +5,10 @@ YAGNI - You are not gonna need it;
 SMALL COMMITS;
 KISS - Keep it simple and stupid;
 //Mantenha tudo simples e estúpido, para qualquer pessoa conseguir utilizar.
-DI - Dependency Injection
+DI - Dependency Injection;
+SRP - Single Responsability Principle;
+//Cada uma das classes de useCases só tem uma responsabilidade
+DRY - Dont Repeat Yourself;
 
 -   Login:
     1.Email
