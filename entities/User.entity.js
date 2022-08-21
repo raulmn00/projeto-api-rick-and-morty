@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { CharacterEntity } from './Character.entity';
+import { CharacterEntity } from './Character.entity.js';
 
 export class UserEntity {
     constructor(user) {
@@ -14,5 +14,15 @@ export class UserEntity {
     addCharacter(character) {
         const newCharacter = new CharacterEntity(character, this.id);
         this.charactersList.push(newCharacter.getCharacter());
+    }
+    getUser() {
+        return {
+            id: this.id,
+            name: this.name,
+            userPassword: this.userPassword,
+            userEmail: this.userEmail,
+            userImage: this.userImage,
+            charactersList: this.charactersList,
+        };
     }
 }
