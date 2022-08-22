@@ -1,13 +1,14 @@
-import { model, Schema } from 'mongoose';
-import { characterDb } from './character.schema.js';
+import mongo from 'mongoose';
+const { Schema, model } = mongo;
+import { characterSchema } from './character.schema.js';
 
 const userSchema = new Schema({
     id: { type: String, required: true },
-    userName: { type: String, required: true },
-    userEmail: { type: String, required: true },
-    userPassword: { type: String, required: true },
-    userImage: { type: String, required: true },
-    characters: { type: [characterDb], required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    image: { type: String, required: true },
+    characters: { type: [characterSchema], required: true },
     createdAt: { type: Date, default: Date.now() },
 });
 

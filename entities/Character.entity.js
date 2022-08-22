@@ -2,19 +2,24 @@ import { randomUUID } from 'node:crypto';
 
 export class CharacterEntity {
     name;
-    urlImage;
+    image;
     constructor(character, userId) {
         this.id = character.id ?? randomUUID();
         this.name = character.name;
-        this.urlImage = character.urlImage;
+        this.image = character.image;
         this.userId = userId;
     }
     getCharacter() {
         return {
             id: this.id,
             name: this.name,
-            urlImage: this.urlImage,
+            image: this.image,
             userId: this.userId,
         };
+    }
+    validate() {
+        if (!this.name || !this.image || !this.userId) {
+            throw new Error('Character invalid.');
+        }
     }
 }

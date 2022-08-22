@@ -5,19 +5,14 @@ export class UserEntity {
     constructor(user) {
         this.id = user.id ?? randomUUID();
         this.name = user.name;
-        this.userPassword = user.userPassword;
-        this.userEmail = user.userEmail;
-        this.userImage = user.userImage;
+        this.password = user.password;
+        this.email = user.email;
+        this.image = user.image;
         this.charactersList = user.charactersList ?? [];
     }
 
     validate() {
-        if (
-            !this.name ||
-            !this.userPassword ||
-            !this.userEmail ||
-            !this.userImage
-        ) {
+        if (!this.name || !this.password || !this.email || !this.image) {
             throw new Error('User invalid.');
         }
     }
@@ -30,9 +25,9 @@ export class UserEntity {
         return {
             id: this.id,
             name: this.name,
-            userPassword: this.userPassword,
-            userEmail: this.userEmail,
-            userImage: this.userImage,
+            password: this.password,
+            email: this.email,
+            image: this.image,
             charactersList: this.charactersList,
         };
     }

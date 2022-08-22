@@ -17,7 +17,7 @@ export class UpdateUserUseCase {
             );
         }
         //Pega os valores antigos do usuario encontrado e substitui os valores novos que recebemos como parametro (userUpdate)
-        const userModified = { ...userToUpdate, userUpdated };
+        const userModified = Object.assign(userToUpdate, userUpdated);
 
         //Usamos a entidade para pegar as informações do usuario atualizado para poder validar
         const userValidated = new UserEntity(userModified);
