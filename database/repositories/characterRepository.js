@@ -5,13 +5,13 @@ export class CharacterRepositoryMongoDB {
         return await characterDb.create(character);
     }
     async findById(characterId) {
-        return await characterDb.findOne({ id: userId });
+        return await characterDb.findOne({ id: characterId });
     }
 
-    async deleteUser(characterId) {
+    async deleteCharacter(characterId) {
         return await characterDb.findOneAndDelete(characterId);
     }
-    async updateUser(character) {
+    async updateCharacter(character) {
         return await characterDb.findOneAndUpdate(
             { id: character.id },
             character,
