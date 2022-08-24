@@ -1,10 +1,9 @@
 import { CharacterEntity } from '../../entities/Character.entity.js';
 
 export class UpdateCharacterUseCase {
-    constructor(userRepository, FindCharacterByIdUseCase, userIdCharacter) {
+    constructor(userRepository, FindCharacterByIdUseCase) {
         this.repository = userRepository;
         this.FindCharacterByIdUseCase = FindCharacterByIdUseCase;
-        this.userId = userIdCharacter;
     }
 
     async execute(characterUpdated, characterId) {

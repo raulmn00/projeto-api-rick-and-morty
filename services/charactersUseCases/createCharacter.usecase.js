@@ -1,10 +1,12 @@
 import { CharacterEntity } from '../../entities/Character.entity.js';
 export class CreateCharacterUseCase {
-    constructor(userRepository) {
-        this.respository = userRepository;
+    constructor(characterRepository, findUserByIdUser) {
+        this.respository = characterRepository;
+        this.findUserByIdUser = findUserByIdUser;
     }
-    async execute(character, user) {
-        const newCharacter = new CharacterEntity(character, user.id);
+    async execute(character, userId) {
+        await this.findUserByIdUser.execute(userId);
+        const newCharacter = new CharacterEntity(character, userId);
         newCharacter.validate();
         return await this.respository.create(newCharacter.getCharacter());
     }
