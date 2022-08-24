@@ -14,6 +14,9 @@ export class CharacterRepositoryMongoDB {
     async findAll() {
         return await characterDb.find();
     }
+    async findByName(characterName) {
+        return await characterDb.findOne({ name: characterName });
+    }
     async updateCharacter(character) {
         return await characterDb.findOneAndUpdate(
             { id: character.id },

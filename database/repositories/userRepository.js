@@ -1,4 +1,4 @@
-import { userDb } from "../mongo/schemas/user.schema.js";
+import { userDb } from '../mongo/schemas/user.schema.js';
 
 export class UserRepositoryMongoDB {
     async create(user) {
@@ -15,5 +15,8 @@ export class UserRepositoryMongoDB {
         return await userDb.findOneAndUpdate({ id: user.id }, user, {
             new: true,
         });
+    }
+    async findAllUsers() {
+        return await userDb.find();
     }
 }
