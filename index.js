@@ -1,86 +1,66 @@
-import { UserRepositoryMongoDB } from './database/repositories/userRepository.js';
-import { CreateUserUseCase } from './services/userUseCases/createUser.usecase.js';
-import { MongoDbConnection } from './database/mongo/connection/connect.js';
-import { FindUserByIdUseCase } from './services/userUseCases/findUserById.usecase.js';
-import { UpdateUserUseCase } from './services/userUseCases/updateUser.usecase.js';
-import { DeleteUserUseCase } from './services/userUseCases/deleteUser.usecase.js';
-import { CreateCharacterUseCase } from './services/charactersUseCases/createCharacter.usecase.js';
 import { CharacterRepositoryMongoDB } from './database/repositories/characterRepository.js';
-import { DeleteCharacterUseCase } from './services/charactersUseCases/deleteCharacter.usecase.js';
-import { UpdateCharacterUseCase } from './services/charactersUseCases/updateCharacter.usecase.js';
-import { FindCharacterByIdUseCase } from './services/charactersUseCases/findByIdCharacter.usecase.js';
-const userRepository = new UserRepositoryMongoDB();
+import { UserRepositoryMongoDB } from './database/repositories/userRepository.js';
+import { MongoDbConnection } from './database/mongo/connection/connect.js';
+import { CreateUserUseCase } from './services/userUseCases/createUser.usecase.js';
+import { UpdateUserUseCase } from './services/userUseCases/updateUser.usecase.js';
+import { FindUserByIdUseCase } from './services/userUseCases/findUserById.usecase.js';
+import { FindAllUsersUseCase } from './services/userUseCases/findAllUsers.usecase.js';
+import { DeleteUserUseCase } from './services/userUseCases/deleteUser.usecase.js';
+import { Services } from './services/service.js';
+import { Controller } from './controllers/controller.js';
+import { UserEntity } from './entities/User.entity.js';
+
+const connectionDb = new MongoDbConnection();
+await connectionDb.connectDb();
+
 const characterRepository = new CharacterRepositoryMongoDB();
+const userRepository = new UserRepositoryMongoDB();
 const createUserUseCase = new CreateUserUseCase(userRepository);
-const dataBase = new MongoDbConnection();
-
-await dataBase.connectDb().catch((err) => {
-    console.log(err);
-});
-
-/*
-const newUser = await createUserUseCase.execute({
-    name: 'Renan Vicente',
-    password: 'renis@gmail.com',
-    email: 'senhasegura',
-    image: 'http://imagem.com',
-});
-*/
-const findByIdUser = new FindUserByIdUseCase(userRepository);
-const userFinded = await findByIdUser.execute(
-    '4de67bc4-a6d5-4e17-9518-95291cd4f405',
+const findByIdUserUseCase = new FindUserByIdUseCase(userRepository);
+const updateUserUseCase = new UpdateUserUseCase(
+    userRepository,
+    findByIdUserUseCase,
 );
-//console.log(userFinded.id);
-//const newCharacter = new CreateCharacterUseCase(characterRepository);
+const findAllUserUseCase = new FindAllUsersUseCase(userRepository);
+const deleteUserUseCase = new DeleteUserUseCase(userRepository);
+
+const userService = new Services(
+    createUserUseCase,
+    updateUserUseCase,
+    deleteUserUseCase,
+    findByIdUserUseCase,
+    findAllUserUseCase,
+);
+
+const userController = new Controller(userService);
 
 /*
-const createCharacter = await newCharacter.execute(
-    {
-        name: 'Personagem 2',
-        image: 'http://imagem.com',
-        userId: userFinded.id,
+const newUser = await userController.createService({
+    body: {
+        name: 'Novo Usuário',
+        email: 'emailnovo@gmail.com',
+        password: 'senhanova',
+        image: 'https://novaimagem.com',
     },
-    userFinded,
-);
+});
 
-console.log(createCharacter);*/
+
+console.log(newUser); */
 
 /*
-const deleteUser = new DeleteCharacterUseCase(characterRepository);
+const deleteUser = await userController.deleteService({
+    params: {
+        id: '744e7338-d99b-43c7-bdd1-0ec7a0f901c8',
+    },
+});
+console.log(deleteUser);*/
 
-const deletedUser = await deleteUser.execute(
-    'cd943b91-a300-4dab-8abd-ec016207508d',
-);
-console.log(deletedUser);*/
-
-//const findByIdUser = new FindUserByIdUseCase(repository);
-
-//const updateUser = new UpdateUserUseCase(repository, findByIdUser);
-
-/*const userUpdated = await updateUser.execute(
-    { name: 'Raul Atualizado Denovo', email: 'meumelhoremail@gmail.com' },
-    'f57601a7-648e-4bba-b9ba-1f7f3f357993',
-);*/
-
-const FindCharacterById = new FindCharacterByIdUseCase(characterRepository);
-
-const updateCharacter = new UpdateCharacterUseCase(
-    characterRepository,
-    FindCharacterById,
-    '4de67bc4-a6d5-4e17-9518-95291cd4f405',
-);
-
-const characterUpdated = await updateCharacter.execute(
-    { name: 'Novo Personagem' },
-    '318a51cf-7bb3-4bf4-878a-ffefbb248fc8',
-);
-console.log(characterUpdated);
-
-//const deleteUser = new DeleteUserUseCase(repository);
-
-/*const deletedUser = await deleteUser.execute(
-    'f57601a7-648e-4bba-b9ba-1f7f3f357993',
-);
-
-console.log(deletedUser);
+/*
+const updateUser = await userController.updateService({
+    body: { name: 'Raul', email: 'raul@gmail.com' },
+    params: {
+        id: '744e7338-d99b-43c7-bdd1-0ec7a0f901c8',
+    },
+});
+console.log(updateUser);
 */

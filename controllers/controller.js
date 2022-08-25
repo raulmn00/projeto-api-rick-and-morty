@@ -1,4 +1,4 @@
-import { handleError } from './errors/handleError';
+import { handleError } from './errors/handleError.js';
 export class Controller {
     constructor(service) {
         this.service = service;
@@ -6,19 +6,20 @@ export class Controller {
     async createService(req, res) {
         try {
             const response = await this.service.createService(req.body);
-            res.status(200).send(response);
+            return response;
         } catch (err) {
             handleError(err, res);
         }
     }
     async updateService(req, res) {
         try {
-            idParam = req.params.id;
+            const idParam = req.params.id;
             const response = await this.service.updateService(
                 req.body,
                 idParam,
             );
-            res.status(200).send(response);
+
+            return response;
         } catch (err) {
             handleError(err, res);
         }
@@ -27,7 +28,7 @@ export class Controller {
         try {
             const idParam = req.params.id;
             const response = await this.service.deleteService(idParam);
-            res.status(200).send(response);
+            return response;
         } catch (err) {
             handleError(err, res);
         }
