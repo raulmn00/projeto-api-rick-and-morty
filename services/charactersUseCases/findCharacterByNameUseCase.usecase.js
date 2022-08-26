@@ -1,4 +1,4 @@
-export class findCharacterByNameUseCase {
+export class FindCharacterByNameUseCase {
     constructor(characterRepository) {
         this.characterRepository = characterRepository;
     }
