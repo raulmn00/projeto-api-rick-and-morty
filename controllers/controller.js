@@ -41,7 +41,7 @@ export class Controller {
             res.status(500);
         }
     }
-    async findById(req, res) {
+    async findByIdController(req, res) {
         try {
             const idParam = req.params.id;
             const response = await this.service.findByIdService(idParam);
