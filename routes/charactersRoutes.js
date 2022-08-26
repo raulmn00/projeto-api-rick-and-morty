@@ -1,7 +1,7 @@
 export class CharacterRoutes {
     constructor(controller, router) {
         this.characterController = controller;
-        this.route = router;
+        this.router = router;
     }
     route() {
         router.get('/', this.characterController.findAll);
