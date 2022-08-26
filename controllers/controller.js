@@ -6,7 +6,7 @@ export class Controller {
     async createService(req, res) {
         try {
             const response = await this.service.createService(req.body);
-            return response;
+            res.status(200).send(response);
         } catch (err) {
             handleError(err, res);
         }
@@ -19,7 +19,7 @@ export class Controller {
                 idParam,
             );
 
-            return response;
+            res.status(200).send(response);
         } catch (err) {
             handleError(err, res);
         }
@@ -28,7 +28,7 @@ export class Controller {
         try {
             const idParam = req.params.id;
             const response = await this.service.deleteService(idParam);
-            return response;
+            res.status(200).send(response);
         } catch (err) {
             handleError(err, res);
         }
