@@ -8,16 +8,16 @@ export class UserRoutes {
             this.userController.findAll(req, res),
         );
         this.router.post('/create', (req, res) =>
-            this.userController.createService(req, res),
+            this.userController.createController(req, res),
         );
         this.router.patch('/update/:id', (req, res) =>
-            this.userController.updateService(req, res),
+            this.userController.updateController(req, res),
         );
         this.router.delete('/delete/:id', (req, res) =>
-            this.userController.deleteService(req, res),
+            this.userController.deleteController(req, res),
         );
         this.router.get('/:id', (req, res) =>
-            this.userController.findById(req, res),
+            this.userController.findByIdController(req, res),
         );
         return this.router;
     }
