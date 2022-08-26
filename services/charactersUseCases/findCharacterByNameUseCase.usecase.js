@@ -3,6 +3,8 @@ export class FindCharacterByNameUseCase {
         this.characterRepository = characterRepository;
     }
     async execute(characterName) {
-        return await this.characterRepository.findByName(characterName);
+        return await this.characterRepository.findCharacterByName(
+            characterName,
+        );
     }
 }

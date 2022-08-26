@@ -3,10 +3,10 @@ export class Controller {
     constructor(service) {
         this.service = service;
     }
-    async createService(req, res) {
+    async createController(req, res) {
         try {
             const response = await this.service.createService(req.body);
-            res.status(200).send(response);
+            res.status(201).send(response);
         } catch (err) {
             handleError(err, res);
         }
@@ -24,7 +24,7 @@ export class Controller {
             handleError(err, res);
         }
     }
-    async deleteService(req, res) {
+    async deleteController(req, res) {
         try {
             const idParam = req.params.id;
             const response = await this.service.deleteService(idParam);
@@ -33,7 +33,7 @@ export class Controller {
             handleError(err, res);
         }
     }
-    async findAll(req, res) {
+    async findAllController(req, res) {
         try {
             const response = await this.service.findAllService();
             res.status(200).send(response);
