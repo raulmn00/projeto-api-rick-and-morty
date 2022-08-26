@@ -8,15 +8,20 @@ import { UpdateCharacterUseCase } from '../services/charactersUseCases/updateCha
 import { CharacterController } from '../controllers/characterController.js';
 import { Services } from '../services/service.js';
 import { CharacterRoutes } from '../routes/charactersRoutes.js';
+import { FindUserByIdUseCase } from '../services/userUseCases/findUserById.usecase.js';
+import { UserRepositoryMongoDB } from '../database/repositories/userRepository.js';
 
 export function makeCharacterFactory(router) {
     const characterRepositoryMongoDB = new CharacterRepositoryMongoDB();
+    const userRepositoryMongoDB = new UserRepositoryMongoDB();
+    const findUserByIdUseCase = new FindUserByIdUseCase(userRepositoryMongoDB);
 
-    const createCharacterUseCase = new CreateCharacterUseCase(
-        characterRepositoryMongoDB,
-    );
     const findCharacterByIdUseCase = new FindCharacterByIdUseCase(
         characterRepositoryMongoDB,
+    );
+    const createCharacterUseCase = new CreateCharacterUseCase(
+        characterRepositoryMongoDB,
+        findUserByIdUseCase,
     );
     const updateCharacterUseCase = new UpdateCharacterUseCase(
         characterRepositoryMongoDB,

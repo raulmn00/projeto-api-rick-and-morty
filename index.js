@@ -12,11 +12,11 @@ const router = Router();
 app.use(express.json());
 app.use(cors());
 
-const user = makeUserFactory(router);
 const character = makeCharacterFactory(router);
+const user = makeUserFactory(router);
 
-app.use('/users', user.route());
 app.use('/characters', character.route());
+app.use('/users', user.route());
 
 app.listen(3000, () => {
     console.log('Servidor rodando em http://localhost:3000.');

@@ -1,12 +1,12 @@
-import { UserRepositoryMongoDB } from '../database/repositories/userRepository';
+import { UserRepositoryMongoDB } from '../database/repositories/userRepository.js';
 import { CreateUserUseCase } from '../services/userUseCases/createUser.usecase.js';
 import { UpdateUserUseCase } from '../services/userUseCases/updateUser.usecase.js';
 import { FindUserByIdUseCase } from '../services/userUseCases/findUserById.usecase.js';
 import { FindAllUsersUseCase } from '../services/userUseCases/findAllUsers.usecase.js';
 import { DeleteUserUseCase } from '../services/userUseCases/deleteUser.usecase.js';
-import { Services } from '../services/service';
+import { Services } from '../services/service.js';
 import { UserRoutes } from '../routes/userRoutes.js';
-import { Controller } from '../controllers/controller';
+import { Controller } from '../controllers/controller.js';
 
 export function makeUserFactory(router) {
     const userRepository = new UserRepositoryMongoDB();

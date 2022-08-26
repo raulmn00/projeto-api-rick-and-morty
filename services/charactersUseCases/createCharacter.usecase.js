@@ -4,7 +4,9 @@ export class CreateCharacterUseCase {
         this.respository = characterRepository;
         this.findUserByIdUser = findUserByIdUser;
     }
-    async execute(character, userId) {
+    async execute(character) {
+        console.log(character);
+        const userId = character.userId;
         await this.findUserByIdUser.execute(userId);
         const newCharacter = new CharacterEntity(character, userId);
         newCharacter.validate();

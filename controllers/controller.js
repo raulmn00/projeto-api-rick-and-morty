@@ -11,7 +11,7 @@ export class Controller {
             handleError(err, res);
         }
     }
-    async updateService(req, res) {
+    async updateController(req, res) {
         try {
             const idParam = req.params.id;
             const response = await this.service.updateService(
@@ -43,7 +43,7 @@ export class Controller {
     }
     async findById(req, res) {
         try {
-            const idParam = req.body.id;
+            const idParam = req.params.id;
             const response = await this.service.findByIdService(idParam);
             res.status(200).send(response);
         } catch (err) {

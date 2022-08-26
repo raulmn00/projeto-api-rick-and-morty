@@ -1,41 +1,27 @@
 import { CharacterEntity } from '../../entities/Character.entity.js';
-
 export class UpdateCharacterUseCase {
-    constructor(userRepository, FindCharacterByIdUseCase) {
-        this.repository = userRepository;
-        this.FindCharacterByIdUseCase = FindCharacterByIdUseCase;
+    constructor(characterRepository, findCharacterById) {
+        this.repository = characterRepository;
+        this.findCharacterById = findCharacterById;
     }
 
     async execute(characterUpdated, characterId) {
-        //Encontra o user por ID e o retorna, senão encontra retorna undefined.
-        const characterToUpdate = await this.FindCharacterByIdUseCase.execute(
+        // usando o useCase de findCharacterById para aproveitar as validações e pegar o character que será atualizado
+        const findedCharacter = await this.findCharacterById.execute(
             characterId,
         );
-
-        //se userToUpdate for undefined, dispara um novo erro.
-        if (!characterToUpdate) {
-            throw new Error(
-                `User id: ${userId} to update not pertence a user.`,
-            );
-        }
-        //Pega os valores antigos do usuario encontrado e substitui os valores novos que recebemos como parametro (userUpdate)
-        const characterModified = Object.assign(
-            characterToUpdate,
+        // usamos o object assign pegar os dados ja salvos no banco e atualizar somente os que recebemos como parametro
+        const updatedCharacter = Object.assign(
+            findedCharacter,
             characterUpdated,
         );
-
-        //Usamos a entidade para pegar as informações do usuario atualizado para poder validar
-        const characterValidated = new CharacterEntity(
-            characterModified,
-            this.userId,
-        );
-
-        //se as novas propriedades nao forem validas a entidade ira disparar um erro
-        characterValidated.validate();
-
-        //vai passar os dados do usuario que virão da entidade para o repository
+        // instanciamos nossa entidade passando o objeto atualizado como parametro para podermos utilizar os métodos da mesma
+        const validatedCharacter = new CharacterEntity(updatedCharacter);
+        // utilizamos o método validate para garantir que não foi passado nenhum parametro invalido
+        validatedCharacter.validate();
+        // dando tudo certo até aqui, basta salvarmos no banco o objeto que vem do método getCharacter da instancia.
         return await this.repository.updateCharacter(
-            characterValidated.getCharacter(),
+            validatedCharacter.getCharacter(),
         );
     }
 }

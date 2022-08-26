@@ -4,11 +4,28 @@ export class CharacterRoutes {
         this.router = router;
     }
     route() {
-        router.get('/', this.characterController.findAll);
-        router.post('/create', this.characterController.createService);
-        router.patch('/update/:id', this.characterController.updateService);
-        router.delete('/delete/:id', this.characterController.deleteService);
-        router.get('/find/:id', this.characterController.findById);
-        router.get('/search', this.characterController.findCharacterByName);
+        this.router.get('/all-chars', (req, res) =>
+            this.characterController.findAll(req, res),
+        );
+        this.router.post('/create-char', (req, res) =>
+            this.characterController.createService(req, res),
+        );
+
+        this.router.patch('/update-character/:id', (req, res) =>
+            this.characterController.updateController(req, res),
+        );
+
+        this.router.delete('/delete-character/:id', (req, res) =>
+            this.characterController.deleteService(req, res),
+        );
+
+        this.router.get('/find-character/:id', (req, res) =>
+            this.characterController.findByIdService(req, res),
+        );
+
+        this.router.get('/search', (req, res) =>
+            this.characterController.findCharacterByName(req, res),
+        );
+        return this.router;
     }
 }
