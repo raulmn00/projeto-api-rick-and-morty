@@ -17,7 +17,12 @@ export class AuthController {
                 throw new Error('Invalid password, try again.');
             }
             delete user.passowrd;
-            const token = this.jwtHelper.generateToken(user);
+            const tokenData = {
+                email: user.email,
+                image: user.image,
+                id: user.id,
+            };
+            const token = this.jwtHelper.generateToken(tokenData);
             res.status(200).send({
                 accessToken: token,
             });
