@@ -7,5 +7,6 @@ export class AuthRouter {
         this.router.post('/login', (req, res) =>
             this.controller.login(req, res),
         );
+        return this.router;
     }
 }
