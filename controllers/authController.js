@@ -16,7 +16,6 @@ export class AuthController {
             if (!passwordIsValid) {
                 throw new Error('Invalid password, try again.');
             }
-            delete user.passowrd;
             const tokenData = {
                 email: user.email,
                 image: user.image,
