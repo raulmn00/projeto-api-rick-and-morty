@@ -1,10 +1,12 @@
+import { authMiddleware } from '../middleware/authMiddleware.js';
+
 export class UserRoutes {
     constructor(controller, router) {
         this.userController = controller;
         this.router = router;
     }
     route() {
-        this.router.get('/', (req, res) =>
+        this.router.get('/', authMiddleware, (req, res) =>
             this.userController.findAllController(req, res),
         );
         this.router.post('/create', (req, res) =>
