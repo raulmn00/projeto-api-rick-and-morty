@@ -11,7 +11,7 @@ export const swaggerDocumentation = {
     },
     servers: [
         {
-            url: '',
+            url: 'https://api-rick-and-morty-crud-c017.herokuapp.com/',
             description: 'API Production',
         },
         {
