@@ -1,6 +1,6 @@
 export class EquipmentsController {
     constructor(createEquipmentUseCase) {
-        this.createEquipmentUseCase = this.createEquipmentUseCase;
+        this.createEquipmentUseCase = createEquipmentUseCase;
     }
     async create(req, res) {
         try {
@@ -8,7 +8,7 @@ export class EquipmentsController {
             const response = await this.createEquipmentUseCase.execute(
                 equipment,
             );
-            res.status(200).send(response);
+            res.status(201).send(response);
         } catch (err) {
             res.status(400).send(err.message);
         }

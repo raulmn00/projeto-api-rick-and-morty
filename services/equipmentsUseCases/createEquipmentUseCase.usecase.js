@@ -1,4 +1,4 @@
-import { Equipments } from '../../entities/Equipments';
+import { Equipments } from '../../entities/Equipments.js';
 
 export class CreateEquipmentsUseCase {
     constructor(equipmentRepository) {
